@@ -7,3 +7,5 @@ docker run -e MYSQL_ROOT_PASSWORD=mysql -e MYSQL_USER=test -e MYSQL_PASSWORD=myp
 ```
 
 Forked for pull request demo :)
+
+full access
