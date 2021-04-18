@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 public class Parent {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY);
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
     String telephoneNumber;
