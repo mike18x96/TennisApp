@@ -2,12 +2,11 @@ package pl.sda.hibernate.entity;
 
 import java.util.Scanner;
 
+
 public class CoachCLI {
 
-    private static void coachMenu(){
-
-        Coach coach;
-        final Scanner scanner = new Scanner(System.in);
+    private static void coachMenu() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj, co chcesz zrobić: " +
                 "\n1 - dodać trenera" +
                 "\n2 - zmienić dane trenera" +
@@ -15,7 +14,7 @@ public class CoachCLI {
                 "\n4 - usunąć trenera");
         int choice = scanner.nextInt();
 
-        switch (choice){
+        switch (choice) {
             case 1:
                 addCoach();
             case 2:
@@ -35,15 +34,18 @@ public class CoachCLI {
     }
 
     private static void updateCoach() {
+
     }
 
     private static void addCoach() {
-        final Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj imię i nazwisko: ");
         String name = scanner.nextLine();
         System.out.println("Podaj adres e-mail: ");
         String email = scanner.nextLine();
         System.out.println("Podaj adres zamieszkania: ");
         String address = scanner.nextLine();
+
+        final Coach coach = new Coach(null, name, email, address);
     }
 }
