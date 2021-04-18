@@ -1,11 +1,36 @@
 package pl.sda.hibernate.entity;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import pl.sda.hibernate.dao.CoachDao;
+import pl.sda.hibernate.dao.HibernateCoachDao;
+import pl.sda.hibernate.entity.Coach;
+
 import java.util.Scanner;
 
 
 public class CoachCLI {
 
+    private static SessionFactory sessionFactory;
+    private static CoachDao coachDao;
+
+    public static void main(String[] args) {
+
+        sessionFactory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Coach.class)
+                .buildSessionFactory();
+        coachDao = new HibernateCoachDao(sessionFactory);
+
+        System.out.println("\n\n--------------------->\n" +
+                "Hibernate Session Factory Created");
+
+        coachMenu();
+    }
+
+
     private static void coachMenu() {
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj, co chcesz zrobić: " +
                 "\n1 - dodać trenera" +
@@ -16,7 +41,7 @@ public class CoachCLI {
 
         switch (choice) {
             case 1:
-                addCoach();
+                createCoach();
             case 2:
                 updateCoach();
             case 3:
@@ -37,7 +62,7 @@ public class CoachCLI {
 
     }
 
-    private static void addCoach() {
+    private static void createCoach() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj imię i nazwisko: ");
         String name = scanner.nextLine();
@@ -46,6 +71,7 @@ public class CoachCLI {
         System.out.println("Podaj adres zamieszkania: ");
         String address = scanner.nextLine();
 
-        final Coach coach = new Coach(null, name, email, address);
+        final Coach coach = new Coach(null,name,email,address);
+        coachDao.create(coach);
     }
 }
