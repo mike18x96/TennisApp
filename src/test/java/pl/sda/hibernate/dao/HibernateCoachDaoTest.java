@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.sda.hibernate.entity.Coach;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class HibernateCoachDaoTest {
 
     public final Coach testCoach1 = new Coach(
-            5L,
+            null,
             "Michal",
             "test email",
             "test address"
     );
     public final Coach testCoach2 = new Coach(
-            -5L,
+            null,
             "Michal 2",
             "test email 2",
             "test address 2"
@@ -45,7 +46,6 @@ class HibernateCoachDaoTest {
     @Test
     void shouldCreateLocation() {
         Coach testCoach = new Coach();
-        testCoach.setId(6L);
         testCoach.setName("Michal");
         testCoach.setEmail("test email");
         testCoach.setAddress("test address");
@@ -105,6 +105,7 @@ class HibernateCoachDaoTest {
         final Coach unexpectedCoach = hibernateCoachDao.findById(testCoach1.getId());
         assertNull(unexpectedCoach);
     }
+
     @Test
     void shouldGetAll() {
         final List<Coach> coachList = hibernateCoachDao.getAll();
