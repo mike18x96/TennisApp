@@ -4,11 +4,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import pl.sda.hibernate.dao.CoachDao;
+import pl.sda.hibernate.dao.HibernateCoachDao;
 import pl.sda.hibernate.entity.Coach;
 
 public class HibernateApp {
 
     static SessionFactory sessionFactory;
+
+    static CoachDao coachDao;
 
     public static void main(String[] args) {
 
@@ -16,26 +20,12 @@ public class HibernateApp {
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Coach.class)
                 .buildSessionFactory();
+        coachDao = new HibernateCoachDao(sessionFactory);
 
         System.out.println("\n\n--------------------->\n" +
                 "Hibernate Session Factory Created");
 
-    }
 
-    private static void template() {
-        Transaction tx = null;
-        try (Session session = sessionFactory.openSession()) {
-            tx = session.beginTransaction();
-
-            // body here
-
-            tx.commit();
-        } catch (Exception ex) {
-            if (tx != null && !tx.getRollbackOnly()) {
-                tx.rollback();
-            }
-            throw ex;
-        }
     }
 
 }
