@@ -1,5 +1,6 @@
 package pl.sda.hibernate.entity;
 
+import com.sun.xml.bind.v2.runtime.output.SAXOutput;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pl.sda.hibernate.dao.CoachDao;
@@ -53,6 +54,7 @@ public class CoachCLI {
     }
 
     private static void deleteCoach() {
+        System.out.println("");
     }
 
     private static void printListOfCoaches() {
@@ -64,14 +66,16 @@ public class CoachCLI {
 
     private static void createCoach() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj imię i nazwisko: ");
-        String name = scanner.nextLine();
+        System.out.println("Podaj imię: ");
+        String firstName = scanner.nextLine();
+        System.out.println("Podaj nazwisko: ");
+        String lastName = scanner.nextLine();
         System.out.println("Podaj adres e-mail: ");
         String email = scanner.nextLine();
         System.out.println("Podaj adres zamieszkania: ");
         String address = scanner.nextLine();
 
-        final Coach coach = new Coach(null,name,email,address);
+        final Coach coach = new Coach(null,firstName, lastName,email,address);
         coachDao.create(coach);
     }
 }

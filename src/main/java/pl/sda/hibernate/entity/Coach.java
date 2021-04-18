@@ -11,16 +11,18 @@ public class Coach {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String name;
+    String firstName;
+    String lastName;
     String email;
     String address;
 
     public Coach() {
     }
 
-    public Coach(Long id, String name, String email, String address) {
+    public Coach(Long id, String firstName, String lastName, String email, String address) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.address = address;
     }
@@ -33,12 +35,20 @@ public class Coach {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -62,12 +72,15 @@ public class Coach {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Coach coach = (Coach) o;
-        return Objects.equals(id, coach.id) && Objects.equals(name, coach.name) && Objects.equals(email, coach.email) && Objects
-                .equals(address, coach.address);
+        return Objects.equals(id, coach.id) &&
+                Objects.equals(firstName, coach.firstName) &&
+                Objects.equals(lastName, coach.lastName) &&
+                Objects.equals(email, coach.email) &&
+                Objects.equals(address, coach.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, address);
+        return Objects.hash(id, firstName, lastName, email, address);
     }
 }
