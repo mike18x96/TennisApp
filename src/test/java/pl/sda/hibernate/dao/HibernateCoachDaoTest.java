@@ -2,9 +2,12 @@ package pl.sda.hibernate.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.sda.hibernate.entity.Coach;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -62,4 +65,59 @@ class HibernateCoachDaoTest {
         assertEquals(expectedSize, actualSize);
         assertEquals(expectedCoach, actualCoach);
     }
+
+    @Test
+    void shouldFindById() {
+
+        final Coach actualCoach = hibernateCoachDao.findById(testCoach1.getId());
+        assertEquals(testCoach1, actualCoach);
+    }
+
+    @Test
+    void shouldUpdateLocation() {
+
+        final Coach modifiedCoach = hibernateCoachDao.findById(testCoach2.getId());
+        modifiedCoach.setId(1L);
+        modifiedCoach.setName("modified name");
+        modifiedCoach.setEmail("modified email");
+        modifiedCoach.setAddress("modified address");
+
+        final Coach updatedCoach = hibernateCoachDao.update(modifiedCoach);
+
+        assertEquals(modifiedCoach, updatedCoach);
+        assertNotSame(modifiedCoach, updatedCoach);
+
+        final Coach actualCoach = hibernateCoachDao.findById(updatedCoach.getId());
+        assertEquals(modifiedCoach, actualCoach);
+    }
+
+    @Test
+    void shouldDeleteCoach() {
+        final int expectedSize = hibernateCoachDao.getAll().size() - 1;
+
+        hibernateCoachDao.delete(testCoach1);
+
+        final List<Coach> coachList = hibernateCoachDao.getAll();
+        final int actualSize = coachList.size();
+        assertEquals(expectedSize, actualSize);
+        assertFalse(coachList.contains(testCoach1));
+
+        final Coach unexpectedCoach = hibernateCoachDao.findById(testCoach1.getId());
+        assertNull(unexpectedCoach);
+    }
+    @Test
+    void shouldGetAll() {
+        final List<Coach> coachList = hibernateCoachDao.getAll();
+
+        assertEquals(2, coachList.size());
+        assertTrue(coachList.contains(testCoach1));
+        assertTrue(coachList.contains(testCoach2));
+    }
+
+    @AfterEach
+    void tearDown() {
+        sessionFactory.close();
+    }
+
+
 }
