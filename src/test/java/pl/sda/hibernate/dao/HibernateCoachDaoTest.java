@@ -17,14 +17,14 @@ class HibernateCoachDaoTest {
     public final Coach testCoach1 = new Coach(
             null,
             "Michal",
-            "DOMINIAK",
+            "LastName",
             "test email",
             "test address"
     );
     public final Coach testCoach2 = new Coach(
             null,
             "Michal 2",
-            "Dominiak 2",
+            "LastName",
             "test email 2",
             "test address 2"
     );
@@ -49,7 +49,7 @@ class HibernateCoachDaoTest {
     void shouldCreateLocation() {
         Coach testCoach = new Coach();
         testCoach.setFirstName("Michal");
-        testCoach.setLastName("Dominiak");
+        testCoach.setLastName("LastName");
         testCoach.setEmail("test email");
         testCoach.setAddress("test address");
         final int expectedSize = hibernateCoachDao.getAll().size() + 1;
@@ -82,8 +82,8 @@ class HibernateCoachDaoTest {
 
         final Coach modifiedCoach = hibernateCoachDao.findById(testCoach2.getId());
         modifiedCoach.setId(1L);
-        modifiedCoach.setFirstName("modified firstName");
-        modifiedCoach.setLastName("modified lastName");
+        modifiedCoach.setFirstName("modified name");
+        modifiedCoach.setLastName("modified name");
         modifiedCoach.setEmail("modified email");
         modifiedCoach.setAddress("modified address");
 

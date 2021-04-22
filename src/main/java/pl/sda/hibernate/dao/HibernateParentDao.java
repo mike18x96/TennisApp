@@ -8,7 +8,7 @@ import pl.sda.hibernate.entity.Parent;
 
 import java.util.List;
 
-public class HibernateParentDao implements ParentDao {
+public class HibernateParentDao implements ParentDao{
     private final SessionFactory sessionFactory;
 
     public HibernateParentDao(SessionFactory sessionFactory) {
@@ -29,8 +29,7 @@ public class HibernateParentDao implements ParentDao {
             if (tx != null && !tx.getRollbackOnly()) {
                 tx.rollback();
             }
-            throw ex;
-        }
+            throw ex;}
     }
 
     @Override
@@ -49,7 +48,6 @@ public class HibernateParentDao implements ParentDao {
             }
             throw ex;
         }
-
     }
 
     @Override
@@ -83,5 +81,4 @@ public class HibernateParentDao implements ParentDao {
             return locationQuery.getResultList();
         }
     }
-
 }

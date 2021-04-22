@@ -10,11 +10,11 @@ import java.util.Objects;
 public class Coach {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String firstName;
-    String lastName;
-    String email;
-    String address;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String address;
 
     public Coach() {
     }
