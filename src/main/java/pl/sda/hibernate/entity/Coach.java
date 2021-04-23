@@ -14,12 +14,12 @@ public class Coach {
     private String firstName;
     private String lastName;
     private String email;
-    private String address;
+    private Address address;
 
     public Coach() {
     }
 
-    public Coach(Long id, String firstName, String lastName, String email, String address) {
+    public Coach(Long id, String firstName, String lastName, String email, Address address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -59,11 +59,11 @@ public class Coach {
         this.email = email;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
