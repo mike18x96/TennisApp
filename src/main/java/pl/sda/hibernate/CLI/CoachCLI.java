@@ -38,16 +38,12 @@ public class CoachCLI {
                 "\n2 - zmienić dane trenera" +
                 "\n3 - wyświetlić listę trenerów" +
                 "\n4 - usunąć trenera" +
-                "\n5 - Exit";
+                "\n5 - wyjście z programu";
         System.out.println(base);
         Scanner in = new Scanner(System.in);
         int choice = in.nextInt();
 
-        boolean a = true;
-        do {
-            in.nextLine();
             switch (choice) {
-
                 case 1:
                     createCoach();
                     clearTerm.clearTerm();
@@ -69,16 +65,18 @@ public class CoachCLI {
                     System.out.println(base);
                     break;
                 case 5:
-                    a = false;
                     break;
             }
-        }
-        while (a);
+
         System.out.println("End");
     }
 
     private static void deleteCoach() {
-        System.out.println();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj id trenera, którego dane chcesz usunąć: ");
+        long idOfCoachToBeUpdated = scanner.nextInt();
+        Coach coach = coachDao.findById(idOfCoachToBeUpdated);
+        coachDao.delete(coach);
     }
 
     private static void printListOfCoaches() {
@@ -89,6 +87,7 @@ public class CoachCLI {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj id trenera, którego dane chcesz zmienić: ");
         long idOfCoachToBeUpdated = scanner.nextInt();
+        scanner.nextLine();
         Coach coach = coachDao.findById(idOfCoachToBeUpdated);
 
         System.out.println("Podaj zmienione dane\nPodaj imię: ");
@@ -97,9 +96,12 @@ public class CoachCLI {
         coach.setLastName(scanner.nextLine());
         System.out.println("Podaj adres e-mail: ");
         coach.setEmail(scanner.nextLine());
-        System.out.println("Adres zamieszkania" +
-                "\nPodaj numer budynku: ");
+        System.out.println("Adres zamieszkania");
         Address address = new Address();
+        System.out.println("Podaj nazwę ulicy: ");
+        address.setStreet(scanner.nextLine());
+        System.out.println("Podaj numer budynku: ");
+        address.setStreet(scanner.nextLine());
         coach.setAddress(address);
         address.setStreetNo(scanner.nextLine());
         System.out.println("Podaj numer mieszkania: ");
@@ -122,11 +124,13 @@ public class CoachCLI {
         System.out.println("Podaj adres e-mail: ");
         String email = scanner.nextLine();
         System.out.println("Adres zamieszkania\n");
-        System.out.println("Podaj numer budynku: ");
         Address address = new Address();
+        System.out.println("Podaj nazwę ulicy: ");
         address.setStreet(scanner.nextLine());
-        System.out.println("Podaj numer mieszkania: ");
+        System.out.println("Podaj numer budynku: ");
         address.setStreetNo(scanner.nextLine());
+        System.out.println("Podaj numer mieszkania: ");
+        address.setFlatNo(scanner.nextLine());
         System.out.println("Podaj kod pocztowy: ");
         address.setZipCode(scanner.nextLine());
         System.out.println("Podaj miejscowość: ");
