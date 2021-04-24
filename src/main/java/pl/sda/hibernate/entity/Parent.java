@@ -10,21 +10,21 @@ import java.util.Objects;
 public class Parent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String name;
-    String telephoneNumber;
-    String email;
-    String address;
+    private Long id;
+    private String name;
+    private String telephoneNumber;
+    private String email;
+    private Address address;
 
-    public Parent(Long id, String name, String telephoneNumber, String email, String address) {
+    public Parent() {
+    }
+
+    public Parent(Long id, String name, String telephoneNumber, String email, Address address) {
         this.id = id;
         this.name = name;
         this.telephoneNumber = telephoneNumber;
         this.email = email;
         this.address = address;
-    }
-
-    public Parent() {
     }
 
     public Long getId() {
@@ -59,17 +59,16 @@ public class Parent {
         this.email = email;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Parent parent = (Parent) o;
