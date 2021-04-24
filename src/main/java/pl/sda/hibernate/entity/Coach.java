@@ -83,4 +83,15 @@ public class Coach {
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, email, address);
     }
+
+    @Override
+    public String toString() {
+        return "Coach{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", address=" + address +
+                '}';
+    }
 }

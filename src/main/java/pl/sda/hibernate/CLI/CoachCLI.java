@@ -7,8 +7,11 @@ import pl.sda.hibernate.dao.CoachDao;
 import pl.sda.hibernate.dao.HibernateCoachDao;
 import pl.sda.hibernate.entity.Address;
 import pl.sda.hibernate.entity.Coach;
+import pl.sda.hibernate.entity.Student;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class CoachCLI {
@@ -38,7 +41,7 @@ public class CoachCLI {
                 "\n2 - zmienić dane trenera" +
                 "\n3 - wyświetlić listę trenerów" +
                 "\n4 - usunąć trenera" +
-                "\n5 - wyjście z programu";
+                "\n5 - Exit";
         System.out.println(base);
         Scanner in = new Scanner(System.in);
 
@@ -51,22 +54,18 @@ public class CoachCLI {
 
                 case 1:
                     createCoach();
-                    clearTerm.clearTerm();
                     System.out.println(base);
                     break;
                 case 2:
                     updateCoach();
-                    clearTerm.clearTerm();
                     System.out.println(base);
                     break;
                 case 3:
                     printListOfCoaches();
-                    clearTerm.clearTerm();
                     System.out.println(base);
                     break;
                 case 4:
                     deleteCoach();
-                    clearTerm.clearTerm();
                     System.out.println(base);
                     break;
                 case 5:
@@ -87,6 +86,11 @@ public class CoachCLI {
     }
 
     private static void printListOfCoaches() {
+        System.out.println("Lista trenerów:\n");
+        List<Coach> coaches = coachDao.getAll();
+        for (Coach coach : coaches) {
+            System.out.println(coach.toString());
+        }
     }
 
     private static void updateCoach() {
