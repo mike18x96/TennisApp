@@ -5,6 +5,7 @@ import org.hibernate.cfg.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.sda.hibernate.entity.Address;
 import pl.sda.hibernate.entity.Parent;
 
 import java.util.List;
@@ -18,14 +19,14 @@ class HibernateParentDaoTest {
             "Artur",
             "55555555",
             "test email",
-            "test address"
+            new Address("street test", "street no test", "flat no test", "zip code test", "city test")
     );
     public final Parent testParent2 = new Parent(
             null,
             "Michal",
             "666666666",
             "test email 2",
-            "test address 2"
+            new Address("street test 2", "street no test 2", "flat no test 2", "zip code test 2", "city test 2")
     );
     private HibernateParentDao hibernateParentDao;
     private SessionFactory sessionFactory;
@@ -49,7 +50,7 @@ class HibernateParentDaoTest {
         Parent testParent = new Parent();
         testParent.setName("Michal");
         testParent.setEmail("test email");
-        testParent.setAddress("test address");
+        testParent.setAddress(new Address("street test", "street no test", "flat no test", "zip code test", "city test"));
         final int expectedSize = hibernateParentDao.getAll().size() + 1;
 
         final Parent savedParent = hibernateParentDao.create(testParent);
@@ -81,7 +82,7 @@ class HibernateParentDaoTest {
         modifiedParent.setId(1L);
         modifiedParent.setName("modified name");
         modifiedParent.setEmail("modified email");
-        modifiedParent.setAddress("modified address");
+        modifiedParent.setAddress(new Address("modified street", "modified street no", "modified flat", "modified zip code", "modified city"));
 
         final Parent updatedParent = hibernateParentDao.update(modifiedParent);
 

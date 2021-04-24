@@ -1,9 +1,6 @@
 package pl.sda.hibernate.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +11,7 @@ public class Parent {
     private String name;
     private String telephoneNumber;
     private String email;
+    @Embedded
     private Address address;
 
     public Parent() {

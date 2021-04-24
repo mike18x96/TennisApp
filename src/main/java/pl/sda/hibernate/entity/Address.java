@@ -1,7 +1,9 @@
 package pl.sda.hibernate.entity;
 
+import javax.persistence.Embeddable;
 import java.util.Objects;
 
+@Embeddable
 public class Address {
     private String street;
     private String streetNo;

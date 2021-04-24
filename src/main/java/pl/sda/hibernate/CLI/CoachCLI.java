@@ -93,9 +93,19 @@ public class CoachCLI {
         String lastName = scanner.nextLine();
         System.out.println("Podaj adres e-mail: ");
         String email = scanner.nextLine();
-        System.out.println("Podaj adres zamieszkania: ");
-        String address = scanner.nextLine();
-        final Coach coach = new Coach(null, firstName, lastName, email, address);
+
+        System.out.println("Adres zamieszkania\n" +
+                "Podaj ulicę: ");
+        System.out.println("Podaj numer ulicy: ");
+        Address address = new Address();
+        address.setStreet(scanner.nextLine());
+        System.out.println("Podaj numer mieszkania: ");
+        address.setStreetNo(scanner.nextLine());
+        System.out.println("Podaj kod pocztowy: ");
+        address.setZipCode(scanner.nextLine());
+        System.out.println("Podaj miejscowość: ");
+        address.setCity(scanner.nextLine());
+        final Coach coach = new Coach(null,firstName, lastName,email, address);
         coachDao.update(coach);
     }
 
@@ -120,7 +130,7 @@ public class CoachCLI {
         System.out.println("Podaj miejscowość: ");
         address.setCity(scanner.nextLine());
 
-        final Coach coach = new Coach(null,firstName, lastName,email, new Address());
+        final Coach coach = new Coach(null,firstName, lastName,email, address);
         coachDao.create(coach);
     }
 }

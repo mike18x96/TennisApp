@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.sda.hibernate.entity.Address;
 import pl.sda.hibernate.entity.Coach;
 
 import java.util.List;
@@ -19,14 +20,14 @@ class HibernateCoachDaoTest {
             "Michal",
             "LastName",
             "test email",
-            "test address"
+            new Address("street test", "street no test", "flat no test", "zip code test", "city test")
     );
     public final Coach testCoach2 = new Coach(
             null,
             "Michal 2",
             "LastName",
             "test email 2",
-            "test address 2"
+            new Address("street test 2", "street no test 2", "flat no test 2", "zip code test 2", "city test 2")
     );
     private HibernateCoachDao hibernateCoachDao;
     private SessionFactory sessionFactory;
@@ -51,7 +52,7 @@ class HibernateCoachDaoTest {
         testCoach.setFirstName("Michal");
         testCoach.setLastName("LastName");
         testCoach.setEmail("test email");
-        testCoach.setAddress("test address");
+        testCoach.setAddress(new Address("street test", "street no test", "flat no test", "zip code test", "city test"));
         final int expectedSize = hibernateCoachDao.getAll().size() + 1;
 
         final Coach savedCoach = hibernateCoachDao.create(testCoach);
@@ -85,7 +86,7 @@ class HibernateCoachDaoTest {
         modifiedCoach.setFirstName("modified name");
         modifiedCoach.setLastName("modified name");
         modifiedCoach.setEmail("modified email");
-        modifiedCoach.setAddress("modified address");
+        modifiedCoach.setAddress(new Address("modified street", "modified street no", "modified flat", "modified zip code", "modified city"));
 
         final Coach updatedCoach = hibernateCoachDao.update(modifiedCoach);
 
