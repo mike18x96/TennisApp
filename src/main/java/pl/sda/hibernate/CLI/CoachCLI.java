@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pl.sda.hibernate.dao.CoachDao;
 import pl.sda.hibernate.dao.HibernateCoachDao;
+import pl.sda.hibernate.entity.Address;
 import pl.sda.hibernate.entity.Coach;
 
 import java.util.Scanner;
@@ -100,16 +101,26 @@ public class CoachCLI {
 
     private static void createCoach() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj imię: ");
+        System.out.println("Dane osobowe" +
+                "\nPodaj imię: ");
         String firstName = scanner.nextLine();
         System.out.println("Podaj nazwisko: ");
         String lastName = scanner.nextLine();
         System.out.println("Podaj adres e-mail: ");
         String email = scanner.nextLine();
-        System.out.println("Podaj adres zamieszkania: ");
-        String address = scanner.nextLine();
+        System.out.println("Adres zamieszkania\n" +
+                "Podaj ulicę: ");
+        System.out.println("Podaj numer ulicy: ");
+        Address address = new Address();
+        address.setStreet(scanner.nextLine());
+        System.out.println("Podaj numer mieszkania: ");
+        address.setStreetNo(scanner.nextLine());
+        System.out.println("Podaj kod pocztowy: ");
+        address.setZipCode(scanner.nextLine());
+        System.out.println("Podaj miejscowość: ");
+        address.setCity(scanner.nextLine());
 
-        final Coach coach = new Coach(null, firstName, lastName, email, address);
+        final Coach coach = new Coach(null,firstName, lastName,email, new Address());
         coachDao.create(coach);
     }
 }
