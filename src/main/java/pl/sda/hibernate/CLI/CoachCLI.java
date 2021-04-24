@@ -1,5 +1,6 @@
 package pl.sda.hibernate.CLI;
 
+import com.sun.xml.bind.v2.runtime.output.SAXOutput;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pl.sda.hibernate.dao.CoachDao;

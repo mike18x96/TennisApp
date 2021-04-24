@@ -39,10 +39,10 @@ public class HibernateCoachDao implements CoachDao {
         try (Session session = sessionFactory.openSession()) {
             tx = session.beginTransaction();
 
-            final Coach updatedLocation = (Coach) session.merge(coach);
+            final Coach updatedCoach = (Coach) session.merge(coach);
 
             tx.commit();
-            return updatedLocation;
+            return updatedCoach;
         } catch (Exception ex) {
             if (tx != null && !tx.getRollbackOnly()) {
                 tx.rollback();
