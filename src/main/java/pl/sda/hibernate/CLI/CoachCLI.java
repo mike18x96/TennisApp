@@ -41,10 +41,11 @@ public class CoachCLI {
                 "\n5 - Exit";
         System.out.println(base);
         Scanner in = new Scanner(System.in);
-        int choice = in.nextInt();
+
 
         boolean a = true;
         do {
+            int choice = in.nextInt();
             in.nextLine();
             switch (choice) {
 
