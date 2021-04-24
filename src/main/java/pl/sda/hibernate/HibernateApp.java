@@ -4,7 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pl.sda.hibernate.dao.CoachDao;
 import pl.sda.hibernate.dao.HibernateCoachDao;
-import pl.sda.hibernate.entity.Coach;
+import pl.sda.hibernate.entity.*;
 
 public class HibernateApp {
 
@@ -17,8 +17,13 @@ public class HibernateApp {
         sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Coach.class)
+                .addAnnotatedClass(Parent.class)
+                .addAnnotatedClass(Student.class)
+                .addAnnotatedClass(Payments.class)
+                .addAnnotatedClass(Group.class)
                 .buildSessionFactory();
         coachDao = new HibernateCoachDao(sessionFactory);
+
 
         System.out.println("\n\n--------------------->\n" +
                 "Hibernate Session Factory Created");

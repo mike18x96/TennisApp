@@ -3,12 +3,8 @@ package pl.sda.hibernate.CLI;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import pl.sda.hibernate.dao.HibernateParentDao;
-import pl.sda.hibernate.dao.HibernateStudentDao;
-import pl.sda.hibernate.dao.StudentDao;
-import pl.sda.hibernate.dao.ParentDao;
-import pl.sda.hibernate.entity.Parent;
-import pl.sda.hibernate.entity.Student;
+import pl.sda.hibernate.dao.*;
+import pl.sda.hibernate.entity.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,8 +23,13 @@ public class StudentCLI {
 
         sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Coach.class)
+                .addAnnotatedClass(Parent.class)
                 .addAnnotatedClass(Student.class)
+                .addAnnotatedClass(Payments.class)
+                .addAnnotatedClass(Group.class)
                 .buildSessionFactory();
+
         studentDao = new HibernateStudentDao(sessionFactory);
         parentDao = new HibernateParentDao(sessionFactory);
 
@@ -146,8 +147,10 @@ public class StudentCLI {
 
         System.out.println("Od ilu lat trenuje? \n");
         int experience = scanner.nextInt();
-        System.out.println("Podaj numer grupy ");
-        int groupNo = scanner.nextInt();
+//        System.out.println("Podaj numer grupy ");
+//        int groupNo = scanner.nextInt();
+//        //TODO
+
         System.out.println("Podaj e-mail opiekuna: ");
         String parentEmail = scanner.nextLine();
 
@@ -162,7 +165,7 @@ public class StudentCLI {
         }
 
 
-        final Student student = new Student(null, firstName, lastName, birthDate, experience, groupNo, byEmail);
+        final Student student = new Student(null, firstName, lastName, birthDate, experience, null, byEmail);
         studentDao.create(student);
     }
 }
