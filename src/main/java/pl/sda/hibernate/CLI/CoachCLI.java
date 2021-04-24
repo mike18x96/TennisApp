@@ -33,7 +33,7 @@ public class CoachCLI {
     private static void coachMenu() {
 
         System.out.println();
-        String base = "Podaj, co chcesz zrobić:  " +
+        String base = "Podaj, co chcesz zrobić: " +
                 "\n1 - dodać trenera" +
                 "\n2 - zmienić dane trenera" +
                 "\n3 - wyświetlić listę trenerów" +
