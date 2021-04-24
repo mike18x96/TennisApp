@@ -41,9 +41,14 @@ public class CoachCLI {
                 "\n5 - wyjście z programu";
         System.out.println(base);
         Scanner in = new Scanner(System.in);
-        int choice = in.nextInt();
 
+
+        boolean a = true;
+        do {
+            int choice = in.nextInt();
+            in.nextLine();
             switch (choice) {
+
                 case 1:
                     createCoach();
                     clearTerm.clearTerm();
@@ -65,9 +70,11 @@ public class CoachCLI {
                     System.out.println(base);
                     break;
                 case 5:
+                    a = false;
                     break;
             }
-
+        }
+        while (a);
         System.out.println("End");
     }
 
