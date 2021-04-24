@@ -78,8 +78,8 @@ public class HibernateCoachDao implements CoachDao {
     @Override
     public List<Coach> getAll() {
         try (Session session = sessionFactory.openSession()) {
-            final Query<Coach> locationQuery = session.createQuery("from Coach", Coach.class);
-            return locationQuery.getResultList();
+            final Query<Coach> coachQuery = session.createQuery("from Coach", Coach.class);
+            return coachQuery.getResultList();
         }
     }
 }

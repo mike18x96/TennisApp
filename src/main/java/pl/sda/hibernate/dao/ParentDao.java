@@ -7,6 +7,7 @@ import java.util.List;
         Parent create(Parent parent);
         Parent update(Parent parent);
         Parent findById(Long id);
+        Parent findByEmail(String email);
         void delete(Parent parent);
 
         List<Parent> getAll();

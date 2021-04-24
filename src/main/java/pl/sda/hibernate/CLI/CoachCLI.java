@@ -1,6 +1,5 @@
 package pl.sda.hibernate.CLI;
 
-import com.sun.xml.bind.v2.runtime.output.SAXOutput;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pl.sda.hibernate.dao.CoachDao;
@@ -8,6 +7,7 @@ import pl.sda.hibernate.dao.HibernateCoachDao;
 import pl.sda.hibernate.entity.Address;
 import pl.sda.hibernate.entity.Coach;
 
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -51,22 +51,18 @@ public class CoachCLI {
 
                 case 1:
                     createCoach();
-                    clearTerm.clearTerm();
                     System.out.println(base);
                     break;
                 case 2:
                     updateCoach();
-                    clearTerm.clearTerm();
                     System.out.println(base);
                     break;
                 case 3:
                     printListOfCoaches();
-                    clearTerm.clearTerm();
                     System.out.println(base);
                     break;
                 case 4:
                     deleteCoach();
-                    clearTerm.clearTerm();
                     System.out.println(base);
                     break;
                 case 5:
@@ -87,6 +83,11 @@ public class CoachCLI {
     }
 
     private static void printListOfCoaches() {
+        System.out.println("Lista trenerów");
+        List<Coach> coaches = coachDao.getAll();
+        for (Coach coach : coaches) {
+            System.out.println(coach);
+        }
     }
 
     private static void updateCoach() {

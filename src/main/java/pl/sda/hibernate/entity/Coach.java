@@ -83,4 +83,12 @@ public class Coach {
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, email, address);
     }
+
+    @Override
+    public String toString() {
+        return "Trener" +
+                "id: " + id +
+                "imię: " + firstName + '\'' +
+                "lastName: " + lastName + '\'';
+    }
 }
