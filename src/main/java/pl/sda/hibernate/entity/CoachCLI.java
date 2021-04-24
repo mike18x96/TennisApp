@@ -3,9 +3,7 @@ package pl.sda.hibernate.entity;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pl.sda.hibernate.dao.CoachDao;
-import pl.sda.hibernate.entity.Address;
 import pl.sda.hibernate.dao.HibernateCoachDao;
-import pl.sda.hibernate.entity.Coach;
 
 import java.util.Scanner;
 
