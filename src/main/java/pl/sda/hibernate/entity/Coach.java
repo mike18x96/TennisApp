@@ -86,12 +86,9 @@ public class Coach {
 
     @Override
     public String toString() {
-        return "Coach{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", address=" + address +
-                '}';
+        return "Trener" +
+                "id: " + id +
+                "imię: " + firstName + '\'' +
+                "lastName: " + lastName + '\'';
     }
 }

@@ -77,8 +77,17 @@ public class HibernateParentDao implements ParentDao{
     @Override
     public List<Parent> getAll() {
         try (Session session = sessionFactory.openSession()) {
-            final Query<Parent> locationQuery = session.createQuery("from Parent", Parent.class);
-            return locationQuery.getResultList();
+            final Query<Parent> coachQuery = session.createQuery("from Parent", Parent.class);
+            return coachQuery.getResultList();
+        }
+    }
+
+    @Override
+    public Parent findByEmail(String email) {
+        try (Session session = sessionFactory.openSession()) {
+            final Query<Parent> coachQuery = session.createQuery("from Parent p where p.email = :emailParam", Parent.class);
+            coachQuery.setParameter("emailParam", email);
+            return coachQuery.getSingleResult();
         }
     }
 }

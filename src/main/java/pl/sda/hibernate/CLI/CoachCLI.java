@@ -1,10 +1,13 @@
 package pl.sda.hibernate.CLI;
+
+import com.sun.xml.bind.v2.runtime.output.SAXOutput;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pl.sda.hibernate.dao.CoachDao;
 import pl.sda.hibernate.dao.HibernateCoachDao;
 import pl.sda.hibernate.entity.Address;
 import pl.sda.hibernate.entity.Coach;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,33 +17,34 @@ public class CoachCLI {
     private static SessionFactory sessionFactory;
     private static CoachDao coachDao;
 
-    public CoachCLI() {
-        if (sessionFactory == null) {
-            sessionFactory = new Configuration()
-                    .configure("hibernate.cfg.xml")
-                    .addAnnotatedClass(Coach.class)
-                    .buildSessionFactory();
-            coachDao = new HibernateCoachDao(sessionFactory);
+    public static void main(String[] args) {
 
-            System.out.println("\n\n--------------------->\n" +
-                    "Hibernate Session Factory Created");
-        }
+        sessionFactory = new Configuration()
+                .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Coach.class)
+                .buildSessionFactory();
+        coachDao = new HibernateCoachDao(sessionFactory);
+
+        System.out.println("\n\n--------------------->\n" +
+                "Hibernate Session Factory Created");
+
         coachMenu();
     }
 
-    public static void coachMenu() {
+    private static void coachMenu() {
 
-        System.out.println("START");
+        System.out.println();
         String base = "Podaj, co chcesz zrobić: " +
-                "\n1 - Dodać trenera" +
-                "\n2 - Zmienić dane trenera" +
-                "\n3 - Wyświetlić listę trenerów" +
-                "\n4 - Usunąć trenera" +
-                "\n5 - Cofnij";
+                "\n1 - dodać trenera" +
+                "\n2 - zmienić dane trenera" +
+                "\n3 - wyświetlić listę trenerów" +
+                "\n4 - usunąć trenera" +
+                "\n5 - wyjście z programu";
         System.out.println(base);
         Scanner in = new Scanner(System.in);
 
-        boolean condDoWhile = true;
+
+        boolean a = true;
         do {
             int choice = in.nextInt();
             in.nextLine();
@@ -63,31 +67,27 @@ public class CoachCLI {
                     System.out.println(base);
                     break;
                 case 5:
-                    condDoWhile = false;
+                    a = false;
                     break;
             }
         }
-        while (condDoWhile);
-        System.out.println("END");
+        while (a);
+        System.out.println("End");
     }
 
     private static void deleteCoach() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj id trenera, którego dane chcesz usunąć: ");
         long idOfCoachToBeUpdated = scanner.nextInt();
-        try {
-            Coach coach = coachDao.findById(idOfCoachToBeUpdated);
-            coachDao.delete(coach);
-        } catch (NullPointerException nullPointerException) {
-            System.out.println("Nie ma takiego trenera\n");
-        }
+        Coach coach = coachDao.findById(idOfCoachToBeUpdated);
+        coachDao.delete(coach);
     }
 
     private static void printListOfCoaches() {
-        System.out.println("Lista trenerów:\n");
+        System.out.println("Lista trenerów");
         List<Coach> coaches = coachDao.getAll();
         for (Coach coach : coaches) {
-            System.out.println(coach.toString());
+            System.out.println(coach);
         }
     }
 

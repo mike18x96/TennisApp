@@ -1,9 +1,7 @@
 package pl.sda.hibernate.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -14,10 +12,31 @@ public class Student {
     private Long id;
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private int yearsOfExperience;
-    private int groupNo;
+    @ManyToOne
+    private Group group;
+    @ManyToOne
     private Parent parent;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return yearsOfExperience == student.yearsOfExperience &&
+                Objects.equals(id, student.id) &&
+                Objects.equals(firstName, student.firstName) &&
+                Objects.equals(lastName, student.lastName) &&
+                Objects.equals(dateOfBirth, student.dateOfBirth) &&
+                Objects.equals(group, student.group) &&
+                Objects.equals(parent, student.parent);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, dateOfBirth, yearsOfExperience, group, parent);
+    }
 
     public Student() {
     }
@@ -38,19 +57,19 @@ public class Student {
         this.firstName = firstName;
     }
 
-    public String getLasteName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLasteName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -62,12 +81,12 @@ public class Student {
         this.yearsOfExperience = yearsOfExperience;
     }
 
-    public int getGroupNo() {
-        return groupNo;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGroupNo(int groupNo) {
-        this.groupNo = groupNo;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public Parent getParent() {
@@ -78,32 +97,22 @@ public class Student {
         this.parent = parent;
     }
 
-    public Student(Long id, String firstName, String lastName, Date dateOfBirth, int yearsOfExperience, int groupNo, Parent parent) {
+    public Student(Long id, String firstName, String lastName, LocalDate dateOfBirth, int yearsOfExperience, Group group, Parent parent) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.yearsOfExperience = yearsOfExperience;
-        this.groupNo = groupNo;
+        this.group = group;
         this.parent = parent;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
-        return yearsOfExperience == student.yearsOfExperience &&
-                groupNo == student.groupNo &&
-                Objects.equals(id, student.id) &&
-                Objects.equals(firstName, student.firstName) &&
-                Objects.equals(lastName, student.lastName) &&
-                Objects.equals(dateOfBirth, student.dateOfBirth) &&
-                Objects.equals(parent, student.parent);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, dateOfBirth, yearsOfExperience, groupNo, parent);
+    public String toString() {
+        return "Uczeń" +
+                "id" + id +
+                ", imię: " + firstName + '\'' +
+                ", nazwisko: " + lastName + '\'' +
+                '}';
     }
 }
