@@ -13,7 +13,6 @@ public class Group {
     @OneToMany(mappedBy = "group")
     private List<Student> studentList = new ArrayList<Student>();
     private String nameLvl;
-    private List<Student> studentList = new ArrayList();
     private int maxNoOfStudents;
     private boolean isGroupFull;
     private double monthlyPayment;

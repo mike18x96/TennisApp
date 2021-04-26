@@ -42,10 +42,10 @@ public class MainApp {
                     GroupCLI groupCLI = new GroupCLI();
                     break;
                 case 3:
-                    ParentCLI parentCLI = new ParentCLI();
+                    //ParentCLI parentCLI = new ParentCLI();
                     break;
                 case 4:
-                    StudentCLI studentCLI = new StudentCLI();
+                    //StudentCLI studentCLI = new StudentCLI();
                     break;
                 case 5:
                     condDoWhile = false;

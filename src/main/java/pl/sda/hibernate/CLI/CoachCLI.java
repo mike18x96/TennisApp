@@ -13,23 +13,23 @@ import java.util.Scanner;
 
 
 public class CoachCLI {
-
     private static SessionFactory sessionFactory;
     private static CoachDao coachDao;
 
-    public static void main(String[] args) {
+    public CoachCLI() {
+        if (sessionFactory == null) {
+            sessionFactory = new Configuration()
+                    .configure("hibernate.cfg.xml")
+                    .addAnnotatedClass(Coach.class)
+                    .buildSessionFactory();
+            coachDao = new HibernateCoachDao(sessionFactory);
 
-        sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(Coach.class)
-                .buildSessionFactory();
-        coachDao = new HibernateCoachDao(sessionFactory);
-
-        System.out.println("\n\n--------------------->\n" +
-                "Hibernate Session Factory Created");
-
+            System.out.println("\n\n--------------------->\n" +
+                    "Hibernate Session Factory Created");
+        }
         coachMenu();
     }
+
 
     private static void coachMenu() {
 
@@ -42,7 +42,6 @@ public class CoachCLI {
                 "\n5 - wyjście z programu";
         System.out.println(base);
         Scanner in = new Scanner(System.in);
-
 
         boolean a = true;
         do {

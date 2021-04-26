@@ -4,6 +4,7 @@ import com.sun.xml.bind.v2.TODO;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pl.sda.hibernate.dao.GroupDao;
+import pl.sda.hibernate.dao.HibernateCoachDao;
 import pl.sda.hibernate.dao.HibernateGroupDao;
 import pl.sda.hibernate.entity.Address;
 import pl.sda.hibernate.entity.Coach;
@@ -18,15 +19,13 @@ public class GroupCLI {
     private static SessionFactory sessionFactory;
     private static GroupDao groupDao;
 
-    public static void main(String[] args) {
-
+    public GroupCLI() {
         if (sessionFactory == null) {
             sessionFactory = new Configuration()
                     .configure("hibernate.cfg.xml")
                     .addAnnotatedClass(Coach.class)
                     .buildSessionFactory();
             groupDao = new HibernateGroupDao(sessionFactory);
-
             System.out.println("\n\n--------------------->\n" +
                     "Hibernate Session Factory Created");
         }
