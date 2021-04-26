@@ -13,7 +13,8 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int groupId;
-    private List<Student> studentList = new ArrayList<Student>();
+    private String nameLvl;
+    private List<Student> studentList = new ArrayList();
     private int maxNoOfStudents;
     private boolean isGroupFull;
     private double monthlyPayment;
@@ -21,12 +22,14 @@ public class Group {
     public Group() {
     }
 
-    public Group(int groupId, List<Student> studentList, int maxNoOfStudents, boolean isGroupFull, double monthlyPayment) {
+    public Group(int groupId, String nameLvl, List<Student> studentList, int maxNoOfStudents, boolean isGroupFull, double monthlyPayment) {
         this.groupId = groupId;
-        this.studentList = studentList;
+        this.nameLvl = nameLvl;
         this.maxNoOfStudents = maxNoOfStudents;
         this.isGroupFull = isGroupFull;
         this.monthlyPayment = monthlyPayment;
+        this.studentList = studentList;
+
     }
 
     public int getGroupId() {
@@ -69,20 +72,24 @@ public class Group {
         this.monthlyPayment = monthlyPayment;
     }
 
+    public String getNameLvl() {
+        return nameLvl;
+    }
+
+    public void setNameLvl(String nameLvl) {
+        this.nameLvl = nameLvl;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Group group = (Group) o;
-        return groupId == group.groupId &&
-                maxNoOfStudents == group.maxNoOfStudents &&
-                isGroupFull == group.isGroupFull &&
-                Double.compare(group.monthlyPayment, monthlyPayment) == 0 &&
-                Objects.equals(studentList, group.studentList);
+        return groupId == group.groupId && maxNoOfStudents == group.maxNoOfStudents && isGroupFull == group.isGroupFull && Double.compare(group.monthlyPayment, monthlyPayment) == 0 && Objects.equals(nameLvl, group.nameLvl) && Objects.equals(studentList, group.studentList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupId, studentList, maxNoOfStudents, isGroupFull, monthlyPayment);
+        return Objects.hash(groupId, nameLvl, studentList, maxNoOfStudents, isGroupFull, monthlyPayment);
     }
 }

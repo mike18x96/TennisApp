@@ -6,9 +6,9 @@
                 <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
                 <property name="connection.url">jdbc:mysql://localhost:3306/sda_proj_1?serverTimezone=UTC</property>
                 <property name="connection.username">root</property>
-                <property name="connection.password">qwerty123456</property>
+                <property name="connection.password">12345678</property>
                 <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
-                <property name="show_sql">true</property>
+<!--                <property name="show_sql">true</property>-->
                 <property name="hibernate.format_sql">true</property>
 
                 <!--        <property name="hibernate.hbm2ddl.auto">create-drop</property>-->

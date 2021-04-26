@@ -4,28 +4,27 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import pl.sda.hibernate.entity.Coach;
+import pl.sda.hibernate.entity.Group;
 
 import java.util.List;
 
-public class HibernateCoachDao implements CoachDao {
+public class HibernateGroupDao implements GroupDao {
     private final SessionFactory sessionFactory;
 
-    public HibernateCoachDao(SessionFactory sessionFactory) {
+    public HibernateGroupDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
     @Override
-    public Coach create(Coach coach) {
+    public Group create(Group group) {
         Transaction tx = null;
-
         try (Session session = sessionFactory.openSession()) {
             tx = session.beginTransaction();
 
-            session.persist(coach);
+            session.persist(group);
 
             tx.commit();
-            return coach;
+            return group;
         } catch (Exception ex) {
             if (tx != null && !tx.getRollbackOnly()) {
                 tx.rollback();
@@ -35,12 +34,12 @@ public class HibernateCoachDao implements CoachDao {
     }
 
     @Override
-    public Coach update(Coach coach) {
+    public Group update(Group coach) {
         Transaction tx = null;
         try (Session session = sessionFactory.openSession()) {
             tx = session.beginTransaction();
 
-            final Coach updatedCoach = (Coach) session.merge(coach);
+            final Group updatedCoach = (Group) session.merge(coach);
 
             tx.commit();
             return updatedCoach;
@@ -53,19 +52,19 @@ public class HibernateCoachDao implements CoachDao {
     }
 
     @Override
-    public Coach findById(Long id) {
+    public Group findById(Long id) {
         try (Session session = sessionFactory.openSession()) {
-            return session.find(Coach.class, id);
+            return session.find(Group.class, id);
         }
     }
 
     @Override
-    public void delete(Coach coach) {
+    public void delete(Group group) {
         Transaction tx = null;
         try (Session session = sessionFactory.openSession()) {
             tx = session.beginTransaction();
 
-            session.delete(coach);
+            session.delete(group);
 
             tx.commit();
         } catch (Exception ex) {
@@ -77,9 +76,9 @@ public class HibernateCoachDao implements CoachDao {
     }
 
     @Override
-    public List<Coach> getAll() {
+    public List<Group> getAll() {
         try (Session session = sessionFactory.openSession()) {
-            final Query<Coach> coachQuery = session.createQuery("from Coach", Coach.class);
+            final Query<Group> coachQuery = session.createQuery("from Coach", Group.class);
             return coachQuery.getResultList();
         }
     }
