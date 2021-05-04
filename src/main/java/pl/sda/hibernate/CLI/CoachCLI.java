@@ -1,6 +1,4 @@
 package pl.sda.hibernate.CLI;
-
-import com.sun.xml.bind.v2.runtime.output.SAXOutput;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pl.sda.hibernate.dao.CoachDao;
@@ -23,7 +21,6 @@ public class CoachCLI {
                     .addAnnotatedClass(Coach.class)
                     .buildSessionFactory();
             coachDao = new HibernateCoachDao(sessionFactory);
-
             System.out.println("\n\n--------------------->\n" +
                     "Hibernate Session Factory Created");
         }
@@ -35,11 +32,12 @@ public class CoachCLI {
 
         System.out.println();
         String base = "Podaj, co chcesz zrobić: " +
-                "\n1 - dodać trenera" +
-                "\n2 - zmienić dane trenera" +
-                "\n3 - wyświetlić listę trenerów" +
-                "\n4 - usunąć trenera" +
-                "\n5 - wyjście z programu";
+                "\n1 - Dodać trenera" +
+                "\n2 - Zmienić dane trenera" +
+                "\n3 - Wyświetlić listę trenerów" +
+                "\n4 - Usunąć trenera" +
+                "\n5 - Cofnij";
+
         System.out.println(base);
         Scanner in = new Scanner(System.in);
 
@@ -77,8 +75,8 @@ public class CoachCLI {
     private static void deleteCoach() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj id trenera, którego dane chcesz usunąć: ");
-        long idOfCoachToBeUpdated = scanner.nextInt();
-        Coach coach = coachDao.findById(idOfCoachToBeUpdated);
+        long idOfCoachToBeDeleted = scanner.nextInt();
+        Coach coach = coachDao.findById(idOfCoachToBeDeleted);
         coachDao.delete(coach);
     }
 

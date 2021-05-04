@@ -18,7 +18,6 @@ public class HibernateCoachDao implements CoachDao {
     @Override
     public Coach create(Coach coach) {
         Transaction tx = null;
-
         try (Session session = sessionFactory.openSession()) {
             tx = session.beginTransaction();
 

@@ -1,18 +1,12 @@
 package pl.sda.hibernate.CLI;
-
-import com.sun.xml.bind.v2.TODO;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pl.sda.hibernate.dao.GroupDao;
-import pl.sda.hibernate.dao.HibernateCoachDao;
 import pl.sda.hibernate.dao.HibernateGroupDao;
-import pl.sda.hibernate.entity.Address;
-import pl.sda.hibernate.entity.Coach;
 import pl.sda.hibernate.entity.Group;
 
 import java.util.List;
 import java.util.Scanner;
-
 
 public class GroupCLI {
 
@@ -23,7 +17,7 @@ public class GroupCLI {
         if (sessionFactory == null) {
             sessionFactory = new Configuration()
                     .configure("hibernate.cfg.xml")
-                    .addAnnotatedClass(Coach.class)
+                    .addAnnotatedClass(Group.class)
                     .buildSessionFactory();
             groupDao = new HibernateGroupDao(sessionFactory);
             System.out.println("\n\n--------------------->\n" +
@@ -38,7 +32,7 @@ public class GroupCLI {
         System.out.println("Informacje o grupie: ");
         String base = "Podaj, co chcesz zrobić: " +
                 "\n1 - Dodać grupe" +
-                "\n2 - Zmienić dane trenera" +
+                "\n2 - Zmienic dane grupy" +
                 "\n3 - Wyświetlić listę grup" +
                 "\n4 - Usunąć grupe" +
                 "\n5 - Cofnij";
@@ -81,8 +75,8 @@ public class GroupCLI {
     private static void deleteGroup() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj id grupy, którą chcesz usunąć: ");
-        long idOfGroupToBeUpdated = scanner.nextInt();
-        Group group = groupDao.findById(idOfGroupToBeUpdated);
+        long idOfGroupToBeDeleted = scanner.nextInt();
+        Group group = groupDao.findById(idOfGroupToBeDeleted);
         groupDao.delete(group);
     }
 
@@ -102,39 +96,27 @@ public class GroupCLI {
         Group group = groupDao.findById(idOfGroupToBeUpdated);
 
         System.out.println("Podaj zmienione dane\n" +
-                "Podaj poziom zaawansowania: ");
+                "Podaj nazwe grupy: ");
         group.setNameLvl(scanner.nextLine());
-        System.out.println("Podaj maksymalną wielkość grupy: ");
+        System.out.println("Podaj maksymalną liczbe osób w grupie: ");
         group.setMaxNoOfStudents(scanner.nextInt());
-        System.out.println("Podaj miesięczną opłate za wpisowe do grupy: ");
+        System.out.println("Podaj miesięczną opłate za uczestnictwo: ");
         group.setMonthlyPayment(scanner.nextInt());
 
         groupDao.update(group);
     }
-    //TODO
+
     private static void createGroup() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Dane osobowe" +
-                "\nPodaj imię: ");
-        String firstName = scanner.nextLine();
-        System.out.println("Podaj nazwisko: ");
-        String lastName = scanner.nextLine();
-        System.out.println("Podaj adres e-mail: ");
-        String email = scanner.nextLine();
-        System.out.println("Adres zamieszkania\n");
-        Address address = new Address();
-        System.out.println("Podaj nazwę ulicy: ");
-        address.setStreet(scanner.nextLine());
-        System.out.println("Podaj numer budynku: ");
-        address.setStreetNo(scanner.nextLine());
-        System.out.println("Podaj numer mieszkania: ");
-        address.setFlatNo(scanner.nextLine());
-        System.out.println("Podaj kod pocztowy: ");
-        address.setZipCode(scanner.nextLine());
-        System.out.println("Podaj miejscowość: ");
-        address.setCity(scanner.nextLine());
+        System.out.println("Dane grupy\n");
+        System.out.println("Podaj nazwę grupy: ");
+        String nameLvl = scanner.nextLine();
+        System.out.println("Podaj maksymalną liczbe osób w grupie: ");
+        int maxNoOfStudents = scanner.nextInt();
+        System.out.println("Podaj miesięczną opłate za uczestnictwo: ");
+        int monthlyPayment = scanner.nextInt();
 
-        //final Group group = new Group(null, firstName, lastName, email, address);
-        //groupDao.create(group);
+        final Group group = new Group(null,nameLvl, maxNoOfStudents, monthlyPayment);
+        groupDao.create(group);
     }
 }

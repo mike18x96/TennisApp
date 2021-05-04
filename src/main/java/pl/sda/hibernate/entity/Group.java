@@ -6,36 +6,34 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "group")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int groupId;
+    private Long Id;
     @OneToMany(mappedBy = "group")
     private List<Student> studentList = new ArrayList<Student>();
     private String nameLvl;
     private int maxNoOfStudents;
-    private boolean isGroupFull;
-    private double monthlyPayment;
+    private int monthlyPayment;
+    private boolean isGroupFull = true;
 
     public Group() {
     }
 
-    public Group(int groupId, String nameLvl, List<Student> studentList, int maxNoOfStudents, boolean isGroupFull, double monthlyPayment) {
-        this.groupId = groupId;
+    public Group(Long Id, String nameLvl, int maxNoOfStudents, int monthlyPayment) {
+        this.Id = Id;
         this.nameLvl = nameLvl;
         this.maxNoOfStudents = maxNoOfStudents;
-        this.isGroupFull = isGroupFull;
         this.monthlyPayment = monthlyPayment;
-        this.studentList = studentList;
-
     }
 
-    public int getGroupId() {
-        return groupId;
+    public Long getId() {
+        return Id;
     }
 
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
+    public boolean isGroupFull() {
+        return isGroupFull;
     }
 
     public List<Student> getStudentList() {
@@ -46,30 +44,6 @@ public class Group {
         this.studentList = studentList;
     }
 
-    public int getMaxNoOfStudents() {
-        return maxNoOfStudents;
-    }
-
-    public void setMaxNoOfStudents(int maxNoOfStudents) {
-        this.maxNoOfStudents = maxNoOfStudents;
-    }
-
-    public boolean isGroupFull() {
-        return isGroupFull;
-    }
-
-    public void setGroupFull(boolean groupFull) {
-        isGroupFull = groupFull;
-    }
-
-    public double getMonthlyPayment() {
-        return monthlyPayment;
-    }
-
-    public void setMonthlyPayment(double monthlyPayment) {
-        this.monthlyPayment = monthlyPayment;
-    }
-
     public String getNameLvl() {
         return nameLvl;
     }
@@ -78,16 +52,33 @@ public class Group {
         this.nameLvl = nameLvl;
     }
 
+    public int getMaxNoOfStudents() {
+        return maxNoOfStudents;
+    }
+
+    public void setMaxNoOfStudents(int maxNoOfStudents) {
+        this.maxNoOfStudents = maxNoOfStudents;
+    }
+
+    public int getMonthlyPayment() {
+        return monthlyPayment;
+    }
+
+    public void setMonthlyPayment(int monthlyPayment) {
+        this.monthlyPayment = monthlyPayment;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Group group = (Group) o;
-        return groupId == group.groupId && maxNoOfStudents == group.maxNoOfStudents && isGroupFull == group.isGroupFull && Double.compare(group.monthlyPayment, monthlyPayment) == 0 && Objects.equals(nameLvl, group.nameLvl) && Objects.equals(studentList, group.studentList);
+        return maxNoOfStudents == group.maxNoOfStudents && isGroupFull == group.isGroupFull && Double.compare(group.monthlyPayment, monthlyPayment) == 0 && Id.equals(group.Id) && Objects.equals(studentList, group.studentList) && Objects.equals(nameLvl, group.nameLvl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupId, nameLvl, studentList, maxNoOfStudents, isGroupFull, monthlyPayment);
+        return Objects.hash(Id, studentList, nameLvl, maxNoOfStudents, isGroupFull, monthlyPayment);
     }
+
 }

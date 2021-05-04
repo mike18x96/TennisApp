@@ -1,14 +1,7 @@
 package pl.sda.hibernate;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import pl.sda.hibernate.CLI.CoachCLI;
 import pl.sda.hibernate.CLI.GroupCLI;
-import pl.sda.hibernate.dao.CoachDao;
-import pl.sda.hibernate.dao.GroupDao;
-import pl.sda.hibernate.dao.HibernateCoachDao;
-import pl.sda.hibernate.dao.HibernateGroupDao;
-import pl.sda.hibernate.entity.Coach;
 
 import java.util.Scanner;
 
@@ -16,7 +9,6 @@ import java.util.Scanner;
 public class MainApp {
 
     public static void main(String[] args) {
-
 
         Scanner in = new Scanner(System.in);
 
@@ -27,7 +19,6 @@ public class MainApp {
                 "\n3 - Edytowac rodzica" +
                 "\n4 - Edytowac ucznia" +
                 "\n5 - Zamknij aplikacje";
-
 
         System.out.println("START");
         do {
